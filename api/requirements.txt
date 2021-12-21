@@ -1,0 +1,5 @@
+Flask==2.0.2
+Flask_Classful==0.14.2
+neomodel==4.0.7
+simplejson==3.17.2
+python-dotenv
