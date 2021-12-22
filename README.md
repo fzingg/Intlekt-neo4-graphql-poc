@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# IEML Ontology to Neo4J nodes script and React Graphin test
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Installation
 
-## Available Scripts
+```
+    python3 -m venv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+    yarn install
+```
 
-In the project directory, you can run:
+## Running Flask and displaying Graphin Graph example
 
-### `yarn start`
+`npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `yarn test`
+## Running the IEML_TO_NEO4J script
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This script Parse a given IEML Ontology JSON file and feed the Neo4j DAB Nodes and RELATIONS accordingly:
 
-### `yarn build`
+`python3 api/ieml_to_neo4j.py`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Before running the script you must :
++ Run a Neo4j DB (see next chapter)
++ Set in the `api/ieml_to_neo4j.py`  
+file these 3 params:
+ * ontology_id
+ * ontology_name
+ * json graph file path
+```
+if __name__ == "__main__":
+    ontology_id = "1"
+    ontology_name = "IEML Grammar"
+    parse_json_and_feed_neo4j("iemlgraph.json", ontology_id, ontology_name)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Running the Neo4j DB
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+There are 2 ways to run a persistent Neo4j DB :
 
-### `yarn eject`
+- Locally with a docker
+- Remotely with a Neo4j AuraDB cloud already set up
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Locally with a docker
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Clone this Neo4j 4.4.0 repo : [docker repo](https://github.com/fzingg/neo4j-docker.git)
 
-## Learn More
+run `docker-compose up`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Open [http://127.0.0.1:7474/browser/](http://127.0.0.1:7474/browser/) to view it in the browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+In `ieml_to_neo4j.py`:
+```
+DB_URL = os.getenv("DB_URL", "bolt://neo4j:foobar@localhost:7687")
+```
 
-### Code Splitting
+### Remotely with a Neo4j AuraDB cloud already set up
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Neo4j AuraDB cloud DB has been set up : [https://console.neo4j.io](https://console.neo4j.io)
 
-### Analyzing the Bundle Size
+Credentials to login to the account and access the DB browser:
+- Email: fredzingg@gmail.com
+- Password: Ieml-sandbox-27
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Can access to the **IEML-neo4j** by clicking on the **Open with** -> Neo4j Browser
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+In `ieml_to_neo4j.py`:
+```
+## Permanent cloud Neo4j DB 
+# DB_URL = os.getenv(
+#     "DB_URL",
+#     "neo4j+s://neo4j:MZaKywDYwm1CdjnI_b5oFwF9Zi8CEwZPhT9nbRdEcOs@ea862a8f.databases.neo4j.io",
+# )
+```
