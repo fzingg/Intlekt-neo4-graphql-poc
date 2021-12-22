@@ -4,7 +4,14 @@ import json
 import neomodel
 import models
 
+## LOCALHOST DB (via docker for example)
 DB_URL = os.getenv("DB_URL", "bolt://neo4j:foobar@localhost:7687")
+
+## Permanent cloud Neo4j DB : https://console.neo4j.io/#databases/ea862a8f/detail
+# DB_URL = os.getenv(
+#     "DB_URL",
+#     "neo4j+s://neo4j:MZaKywDYwm1CdjnI_b5oFwF9Zi8CEwZPhT9nbRdEcOs@ea862a8f.databases.neo4j.io",
+# )
 
 
 def parse_json_and_feed_neo4j(ieml_json_file, ontology_id, ontology_name):

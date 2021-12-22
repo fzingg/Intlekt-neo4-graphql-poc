@@ -5,7 +5,11 @@ import json
 import neomodel
 import models
 
-DB_URL = os.getenv("DB_URL", "bolt://neo4j:foobar@localhost:7687")
+# DB_URL = os.getenv("DB_URL", "bolt://neo4j:foobar@localhost:7687")
+DB_URL = os.getenv(
+    "DB_URL",
+    "neo4j+s://neo4j:MZaKywDYwm1CdjnI_b5oFwF9Zi8CEwZPhT9nbRdEcOs@ea862a8f.databases.neo4j.io",
+)
 
 
 def create_an_item():
