@@ -18,7 +18,7 @@ Open [http://localhost:8000](http://localhost:8000) to view it in the browser.
 
 ## Running the IEML_TO_NEO4J script
 
-This script Parse a given IEML Ontology JSON file and feed the Neo4j DAB Nodes and RELATIONS accordingly:
+This script Parses a given IEML Ontology JSON file and feeds the Neo4j DB Nodes and RELATIONS accordingly:
 
 `python3 api/ieml_to_neo4j.py`
 
@@ -53,10 +53,21 @@ run `docker-compose up`
 
 Open [http://127.0.0.1:7474/browser/](http://127.0.0.1:7474/browser/) to view it in the browser.
 
+In the browser, for the first time, you have to update the password of the DB : 
+
+The first time enter that:
+- User: neo4j
+- Password: foobar
+
+Then it will ask you to set up the new password:
+
+- **foobar**
+
 In `ieml_to_neo4j.py`:
 ```
 DB_URL = os.getenv("DB_URL", "bolt://neo4j:foobar@localhost:7687")
 ```
+
 
 ### Remotely with a Neo4j AuraDB cloud already set up
 
