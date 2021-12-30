@@ -21,7 +21,7 @@ import GraphinIcons from './GraphinIcons';
 ReactDOM.render(
 
   // <Container component="main" maxWidth="lg" className="main">
-  <Graphindemo4 />
+  <Graphindemo9 />
   // </Container>
 
 
